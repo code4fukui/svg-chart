@@ -67,12 +67,15 @@ export class RadarChartSVG extends HTMLElement {
 
   draw() {
     return `
-<svg width="${this.width}" height="${this.height}" viewBox="0 0 ${this.width} ${this.height}">
-  <title>${this.title}</title>
-  ${this.drawCircle()}
-  ${this.drawAxes()}
-  ${this.drawDataPolygon()}
-</svg>
+      <svg
+        style="width:100%;height:100%"
+        width="${this.width}" height="${this.height}" viewBox="0 0 ${this.width} ${this.height}"
+      >
+        <title>${this.title}</title>
+        ${this.drawCircle()}
+        ${this.drawAxes()}
+        ${this.drawDataPolygon()}
+      </svg>
     `;
   }
 

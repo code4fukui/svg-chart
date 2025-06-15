@@ -68,7 +68,10 @@ export class BarChartSVG extends HTMLElement {
   draw() {
     const content = this.data.map((entry, i) => this.drawBarRow(entry, i * (this.barHeight + this.barGap))).join('');
     return `
-      <svg width="${this.width + this.marginLeft + 20}" height="${this.height}" viewBox="0 0 ${this.width + this.marginLeft + 20} ${this.height}">
+      <svg
+        style="width:100%;height:100%"
+        width="${this.width + this.marginLeft + 20}" height="${this.height}" viewBox="0 0 ${this.width + this.marginLeft + 20} ${this.height}"
+      >
         <g>
           ${this.drawAxis()}
           ${content}
@@ -77,7 +80,7 @@ export class BarChartSVG extends HTMLElement {
       </svg>
     `;
   }
-  
+
   update() {
     this.innerHTML = this.draw();
   }
