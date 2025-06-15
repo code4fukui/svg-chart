@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
 
-<div class="chart" id="chart"></div>
-<div class="chart" id="chart2"></div>
+<div class="chart" id="div_chart1"></div>
+<div class="chart" id="div_chart2"></div>
 
 <style>
-.chart > svg {
+.chart svg {
   width: 100%;
   height: 50%;
   x-background-color: #faa;
@@ -16,7 +16,7 @@
 import { RadarChartSVG } from "./RaderChartSVG.js";
 import { BarChartSVG } from "./BarChartSVG.js";
 
-const chart = new RadarChartSVG({
+const chart1 = new RadarChartSVG({
   width: 400,
   height: 400,
   levels: 5,
@@ -26,8 +26,7 @@ const chart = new RadarChartSVG({
   title: "〇〇株式会社",
 });
 
-document.getElementById("chart").innerHTML = chart.draw();
-//console.log(chart.draw());
+div_chart1.appendChild(chart1);
 
 
 const chart2 = new BarChartSVG({
@@ -50,7 +49,6 @@ const chart2 = new BarChartSVG({
     { label: "よく眠れない", values: [0, 0, 100] },
   ]
 });
-
-document.getElementById("chart2").innerHTML = chart2.draw();
+div_chart2.appendChild(chart2);
 
 </script>

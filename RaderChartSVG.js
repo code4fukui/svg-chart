@@ -1,5 +1,6 @@
-export class RadarChartSVG {
+export class RadarChartSVG extends HTMLElement {
   constructor({ width = 300, height = 300, levels = 5, maxValue = 5, labels = [], values = [], title = '' }) {
+    super();
     this.width = width;
     this.height = height;
     this.levels = levels;
@@ -10,6 +11,8 @@ export class RadarChartSVG {
     this.radius = Math.min(width, height) / 2 - 40;
     this.centerX = width / 2;
     this.centerY = height / 2;
+
+    this.update();
   }
 
   toRadians(deg) {
@@ -72,4 +75,9 @@ export class RadarChartSVG {
 </svg>
     `;
   }
+
+  update() {
+    this.innerHTML = this.draw();
+  }
 }
+customElements.define("rader-chart-svg", RadarChartSVG);

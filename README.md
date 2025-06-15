@@ -5,7 +5,7 @@
 
 ## usage
 
-```html
+```js
 import { RadarChartSVG } from "./RaderChartSVG.js";
 import { BarChartSVG } from "./BarChartSVG.js";
 

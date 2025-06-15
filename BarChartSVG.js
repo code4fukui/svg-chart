@@ -1,5 +1,6 @@
-export class BarChartSVG {
+export class BarChartSVG extends HTMLElement {
   constructor({ width = 600, barHeight = 25, barGap = 10, data = [], categories = [], colors = [], maxValue = 100 }) {
+    super();
     this.width = width;
     this.barHeight = barHeight;
     this.barGap = barGap;
@@ -10,6 +11,8 @@ export class BarChartSVG {
     this.marginLeft = 160;
     this.marginBottom = 40;
     this.height = data.length * (barHeight + barGap) + this.marginBottom;
+
+    this.update();
   }
 
   drawBarRow(entry, y) {
@@ -74,4 +77,10 @@ export class BarChartSVG {
       </svg>
     `;
   }
+  
+  update() {
+    this.innerHTML = this.draw();
+  }
 }
+
+customElements.define("bar-chart-svg", BarChartSVG);
