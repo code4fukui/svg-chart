@@ -34,9 +34,9 @@ export class StackedBarChartSVG extends BaseChartSVG {
     entry.values.forEach((value, i) => {
       const width = (value / this.maxValue) * this.width;
       if (value > 1) {
-        const v = value < 3 ? this.toFixed(value, 0) : this.toFixed(value, 0) + "%";
-        segments += `<text x="${x + 3}" y="${y + this.barHeight / 2}" font-size="${this.fontSize}" fill="#000"
-                        text-anchor="start" dominant-baseline="central">${v}</text>`;
+        const v = value < 4 ? this.toFixed(value, 0) : this.toFixed(value, 0) + "%";
+        segments += `<text x="${x + width / 2}" y="${y + this.barHeight / 2}" font-size="${this.fontSize}" fill="#000"
+                        text-anchor="middle" dominant-baseline="central">${v}</text>`;
       }
       x += width;
     });
