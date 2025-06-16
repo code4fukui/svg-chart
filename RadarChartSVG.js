@@ -77,7 +77,7 @@ export class RadarChartSVG extends BaseChartSVG {
       const value = item.value;
       const angle = this.toRadians((360 / this.data.length) * i - 90);
       const gap = 0.7;
-      return this.getPoint(angle, value < this.maxValue / 2 ? value + gap : value - gap);
+      return this.getPoint(angle, value < this.maxValue / 2 ? gpa + value : -gap + value);
     });
     const text = points.map((p, i) => `<text x="${p.x}" y="${p.y}" font-size="${this.fontSize}" text-anchor="middle" dominant-baseline="middle">${this.toFixed(this.data[i].value, 1)}</text>`);
     return text;
