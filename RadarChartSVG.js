@@ -56,7 +56,7 @@ export class RadarChartSVG extends HTMLElement {
       const deg2 = deg + 90;
       const anchor = deg2 == 0 || deg2 == 180 ? "middle" : (deg2 < 180 ? "start" : "end");
       return `
-        <line x1="${this.centerX}" y1="${this.centerY}" x2="${x}" y2="${y}" stroke="#999"/>
+        <line x1="${this.centerX}" y1="${this.centerY}" x2="${x}" y2="${y}" stroke="#999" stroke-width="0.5"/>
         <text x="${lx}" y="${ly}" font-size="${this.fontSize}" text-anchor="${anchor}" dominant-baseline="middle">${item.label}</text>
       `;
     }).join('');
@@ -70,6 +70,15 @@ export class RadarChartSVG extends HTMLElement {
     });
     return this.drawPolygon(points, `fill="${this.fillColor}" stroke="${this.strokeColor}" stroke-width="2"`);
   }
+  drawDataText() {
+    const points = this.data.map((item, i) => {
+      const value = item.value;
+      const angle = this.toRadians((360 / this.data.length) * i - 90);
+      return this.getPoint(angle, value < this.maxValue / 2 ? value + .6 : value - .6);
+    });
+    const text = points.map((p, i) => `<text x="${p.x}" y="${p.y}" font-size="${this.fontSize}" text-anchor="middle" dominant-baseline="middle">${this.data[i].value.toFixed(1)}</text>`);
+    return text;
+  }
 
   draw() {
     return `
@@ -80,6 +89,7 @@ export class RadarChartSVG extends HTMLElement {
         ${this.drawCircle()}
         ${this.drawAxes()}
         ${this.drawDataPolygon()}
+        ${this.drawDataText()}
       </svg>
     `;
   }
