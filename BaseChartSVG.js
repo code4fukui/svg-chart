@@ -3,7 +3,10 @@ export class BaseChartSVG extends HTMLElement {
     super();
   }
   toFixed(v, n) {
-    if (typeof v != "number") return v;
+    if (typeof v != "number") {
+      v = parseFloat(v);
+    }
+    if (isNaN(v)) return "NaN";
     return v.toFixed(n);
   }
   update() {
