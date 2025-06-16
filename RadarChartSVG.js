@@ -1,5 +1,5 @@
 export class RadarChartSVG extends HTMLElement {
-  constructor({ width = 300, height = 300, levels = 5, maxValue = 5, data = [], title = '', fillColor = "rgba(0,200,0,0.3)", strokeColor = "green" }) {
+  constructor({ width = 300, height = 300, levels = 5, maxValue = 5, data = [], title = '', fillColor = "rgba(0,200,0,0.3)", strokeColor = "green", fontSize = 8 }) {
     super();
     this.width = width;
     this.height = height;
@@ -7,11 +7,12 @@ export class RadarChartSVG extends HTMLElement {
     this.maxValue = maxValue;
     this.data = data; // [{ label, value }, ... ]
     //this.title = title;
-    this.radius = Math.min(width, height) / 2 - 40;
+    this.radius = Math.min(width, height) / 2 - 18;
     this.centerX = width / 2;
     this.centerY = height / 2;
     this.fillColor = fillColor;
     this.strokeColor = strokeColor;
+    this.fontSize = fontSize;
 
     this.update();
   }
@@ -53,7 +54,7 @@ export class RadarChartSVG extends HTMLElement {
       const ly = this.getPoint(angle, this.maxValue + 0.5).y;
       return `
         <line x1="${this.centerX}" y1="${this.centerY}" x2="${x}" y2="${y}" stroke="#999"/>
-        <text x="${lx}" y="${ly}" font-size="10" text-anchor="middle" dominant-baseline="middle">${item.label}</text>
+        <text x="${lx}" y="${ly}" font-size="${this.fontSize}" text-anchor="middle" dominant-baseline="middle">${item.label}</text>
       `;
     }).join('');
   }
