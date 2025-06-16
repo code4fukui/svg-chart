@@ -59,7 +59,7 @@ export class StackedBarChartSVG extends HTMLElement {
 
   drawLegend() {
     return this.categories.map((cat, i) => {
-      const x = this.marginLeft + i * 150;
+      const x = this.marginLeft + i * 190;
       return `
         <rect x="${x}" y="${this.height - 30 + 16}" width="15" height="15" fill="${this.colors[i]}" />
         <text x="${x + 20}" y="${this.height - 18 + 16}" font-size="${this.fontSize}">${cat}</text>

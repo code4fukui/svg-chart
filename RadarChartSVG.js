@@ -48,13 +48,16 @@ export class RadarChartSVG extends HTMLElement {
 
   drawAxes() {
     return this.data.map((item, i) => {
-      const angle = this.toRadians((360 / this.data.length) * i - 90);
+      const deg = (360 / this.data.length) * i - 90;
+      const angle = this.toRadians(deg);
       const { x, y } = this.getPoint(angle, this.maxValue);
       const lx = this.getPoint(angle, this.maxValue + 0.5).x;
       const ly = this.getPoint(angle, this.maxValue + 0.5).y;
+      const deg2 = deg + 90;
+      const anchor = deg2 == 0 || deg2 == 180 ? "middle" : (deg2 < 180 ? "start" : "end");
       return `
         <line x1="${this.centerX}" y1="${this.centerY}" x2="${x}" y2="${y}" stroke="#999"/>
-        <text x="${lx}" y="${ly}" font-size="${this.fontSize}" text-anchor="middle" dominant-baseline="middle">${item.label}</text>
+        <text x="${lx}" y="${ly}" font-size="${this.fontSize}" text-anchor="${anchor}" dominant-baseline="middle">${item.label}</text>
       `;
     }).join('');
   }
