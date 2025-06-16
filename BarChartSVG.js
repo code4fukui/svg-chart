@@ -27,8 +27,8 @@ export class BarChartSVG extends BaseChartSVG {
       <rect x="${x}" y="${y}" width="${width}" height="${this.barHeight}" fill="${this.colors[idx % this.colors.length]}" />
     `;
     if (value > 0) {
-      segments += `<text x="${x + width / 2}" y="${y + this.barHeight / 2}" font-size="${this.fontSize}" fill="#000"
-                      text-anchor="middle" dominant-baseline="central">${this.toFixed(value, 0)}%</text>`;
+      segments += `<text x="${x + 2}" y="${y + this.barHeight / 2}" font-size="${this.fontSize}" fill="#000"
+                      text-anchor="start" dominant-baseline="central">${this.toFixed(value, 0)}%</text>`;
     }
 
     // ラベル（左側）

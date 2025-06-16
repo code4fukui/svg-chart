@@ -20,17 +20,23 @@ export class StackedBarChartSVG extends BaseChartSVG {
   }
 
   drawBarRow(entry, y) {
-    let x = this.marginLeft;
     let segments = '';
 
+    let x = this.marginLeft;
     entry.values.forEach((value, i) => {
       const width = (value / this.maxValue) * this.width;
       segments += `
         <rect x="${x}" y="${y}" width="${width}" height="${this.barHeight}" fill="${this.colors[i]}" />
       `;
-      if (value > 0) {
-        segments += `<text x="${x + width / 2}" y="${y + this.barHeight / 2}" font-size="${this.fontSize}" fill="#000"
-                        text-anchor="middle" dominant-baseline="central">${this.toFixed(value, 0)}%</text>`;
+      x += width;
+    });
+    x = this.marginLeft;
+    entry.values.forEach((value, i) => {
+      const width = (value / this.maxValue) * this.width;
+      if (value > 1) {
+        const v = value < 3 ? this.toFixed(value, 0) : this.toFixed(value, 0) + "%";
+        segments += `<text x="${x + 3}" y="${y + this.barHeight / 2}" font-size="${this.fontSize}" fill="#000"
+                        text-anchor="start" dominant-baseline="central">${v}</text>`;
       }
       x += width;
     });

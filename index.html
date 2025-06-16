@@ -52,17 +52,17 @@ const chart2 = new StackedBarChartSVG({
   categories: ["強い症状", "少し症状", "なし"],
   colors: ["#f8b6c2", "#fde1a0", "#a4d6b1"],
   data: [
-    { label: "めまいがする", values: [0, 0, 10] },
-    { label: "体のふしぶしが痛む", values: [0, 0, 20] },
+    { label: "めまいがする", values: [90, 8, 2] },
+    { label: "体のふしぶしが痛む", values: [90, 7, 3] },
     { label: "頭が重かったり頭痛がする", values: [0, 28.6, 71.4] },
     { label: "首筋や肩がこる", values: [14.3, 42.9, 42.8] },
     { label: "腰が痛い", values: [14.3, 42.9, 42.8] },
     { label: "目が疲れる", values: [14.3, 42.9, 42.8] },
     { label: "動悸や息切れがする", values: [0, 0, 100] },
     { label: "胃腸の具合が悪い", values: [0, 28.6, 71.4] },
-    { label: "食欲がない", values: [0, 0, 15] },
-    { label: "便秘や下痢をする", values: [0, 0, 10] },
-    { label: "よく眠れない", values: [0, 0, 5] },
+    { label: "食欲がない", values: [1, 2, 3] },
+    { label: "便秘や下痢をする", values: [2, 0, 10] },
+    { label: "よく眠れない", values: [1, 0, 5] },
   ]
 });
 div_chart2.appendChild(chart2);
@@ -77,6 +77,9 @@ const chart3 = new BarChartSVG({
     { label: "項目A", value: 10 },
     { label: "項目B", value: 20 },
     { label: "項目C (長さ補正)", value: 30 },
+    { label: "項目D", value: 1 },
+    { label: "項目E", value: 2 },
+    { label: "項目F", value: 3 },
   ]
 });
 div_chart3.appendChild(chart3);
