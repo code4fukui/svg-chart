@@ -1,10 +1,11 @@
-export class BarChartSVG extends HTMLElement {
-  constructor({ width = 600, barHeight = 25, barGap = 10, data = [], colors = [], maxValue = 100 }) {
+export class StackedBarChartSVG extends HTMLElement {
+  constructor({ width = 600, barHeight = 25, barGap = 10, data = [], categories = [], colors = [], maxValue = 100 }) {
     super();
     this.width = width;
     this.barHeight = barHeight;
     this.barGap = barGap;
-    this.data = data; // [{ label: "xxx", value: 10 }, ...]
+    this.data = data; // [{ label: "xxx", values: [10, 20, 30] }, ...]
+    this.categories = categories;
     this.colors = colors;
     this.maxValue = maxValue;
     this.marginLeft = 160;
@@ -14,19 +15,21 @@ export class BarChartSVG extends HTMLElement {
     this.update();
   }
 
-  drawBarRow(entry, y, idx) {
+  drawBarRow(entry, y) {
     let x = this.marginLeft;
     let segments = '';
 
-    const value = entry.value;
-    const width = (value / this.maxValue) * this.width;
-    segments += `
-      <rect x="${x}" y="${y}" width="${width}" height="${this.barHeight}" fill="${this.colors[idx % this.colors.length]}" />
-    `;
-    if (value > 0) {
-      segments += `<text x="${x + width / 2}" y="${y + this.barHeight / 2}" font-size="12" fill="#000"
-                      text-anchor="middle" dominant-baseline="central">${value.toFixed(1)}%</text>`;
-    }
+    entry.values.forEach((value, i) => {
+      const width = (value / this.maxValue) * this.width;
+      segments += `
+        <rect x="${x}" y="${y}" width="${width}" height="${this.barHeight}" fill="${this.colors[i]}" />
+      `;
+      if (value > 0) {
+        segments += `<text x="${x + width / 2}" y="${y + this.barHeight / 2}" font-size="12" fill="#000"
+                        text-anchor="middle" dominant-baseline="central">${value.toFixed(1)}%</text>`;
+      }
+      x += width;
+    });
 
     // ラベル（左側）
     segments += `<text x="${this.marginLeft - 10}" y="${y + this.barHeight / 2}" font-size="12" text-anchor="end" dominant-baseline="middle">
@@ -52,8 +55,18 @@ export class BarChartSVG extends HTMLElement {
     return lines;
   }
 
+  drawLegend() {
+    return this.categories.map((cat, i) => {
+      const x = this.marginLeft + i * 120;
+      return `
+        <rect x="${x}" y="${this.height - 30 + 12}" width="15" height="15" fill="${this.colors[i]}" />
+        <text x="${x + 20}" y="${this.height - 18 + 12}" font-size="12">${cat}</text>
+      `;
+    }).join('');
+  }
+
   draw() {
-    const content = this.data.map((entry, i) => this.drawBarRow(entry, i * (this.barHeight + this.barGap), i)).join('');
+    const content = this.data.map((entry, i) => this.drawBarRow(entry, i * (this.barHeight + this.barGap))).join('');
     return `
       <svg
         style="width:100%;height:100%"
@@ -62,6 +75,7 @@ export class BarChartSVG extends HTMLElement {
         <g>
           ${this.drawAxis()}
           ${content}
+          ${this.drawLegend()}
         </g>
       </svg>
     `;
@@ -72,4 +86,4 @@ export class BarChartSVG extends HTMLElement {
   }
 }
 
-customElements.define("bar-chart-svg", BarChartSVG);
+customElements.define("stacked-bar-chart-svg", StackedBarChartSVG);

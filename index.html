@@ -5,6 +5,7 @@
 
 <div class="chart" id="div_chart1"></div>
 <div class="chart" id="div_chart2"></div>
+<div class="chart" id="div_chart3"></div>
 
 <hr>
 <a href="https://github.com/code4fukui/svg-chart">src on GitHub</a><br>
@@ -19,6 +20,7 @@
 
 <script type="module">
 import { RadarChartSVG } from "./RaderChartSVG.js";
+import { StackedBarChartSVG } from "./StackedBarChartSVG.js";
 import { BarChartSVG } from "./BarChartSVG.js";
 
 const chart1 = new RadarChartSVG({
@@ -33,27 +35,40 @@ const chart1 = new RadarChartSVG({
 
 div_chart1.appendChild(chart1);
 
-
-const chart2 = new BarChartSVG({
+const chart2 = new StackedBarChartSVG({
   width: 600,
   barHeight: 25,
   barGap: 8,
   categories: ["強い症状", "少し症状", "なし"],
   colors: ["#f8b6c2", "#fde1a0", "#a4d6b1"],
   data: [
-    { label: "めまいがする", values: [0, 0, 100] },
-    { label: "体のふしぶしが痛む", values: [0, 0, 100] },
+    { label: "めまいがする", values: [0, 0, 10] },
+    { label: "体のふしぶしが痛む", values: [0, 0, 20] },
     { label: "頭が重かったり頭痛がする", values: [0, 28.6, 71.4] },
     { label: "首筋や肩がこる", values: [14.3, 42.9, 42.8] },
     { label: "腰が痛い", values: [14.3, 42.9, 42.8] },
     { label: "目が疲れる", values: [14.3, 42.9, 42.8] },
     { label: "動悸や息切れがする", values: [0, 0, 100] },
     { label: "胃腸の具合が悪い", values: [0, 28.6, 71.4] },
-    { label: "食欲がない", values: [0, 0, 100] },
-    { label: "便秘や下痢をする", values: [0, 0, 100] },
-    { label: "よく眠れない", values: [0, 0, 100] },
+    { label: "食欲がない", values: [0, 0, 15] },
+    { label: "便秘や下痢をする", values: [0, 0, 10] },
+    { label: "よく眠れない", values: [0, 0, 5] },
   ]
 });
 div_chart2.appendChild(chart2);
+
+const chart3 = new BarChartSVG({
+  width: 600,
+  barHeight: 25,
+  barGap: 8,
+  categories: ["強い症状", "少し症状", "なし"],
+  colors: ["#f8b6c2", "#fde1a0"],
+  data: [
+    { label: "項目A", value: 10 },
+    { label: "項目B", value: 20 },
+    { label: "項目C (長さ補正)", value: 30 },
+  ]
+});
+div_chart3.appendChild(chart3);
 
 </script>
