@@ -1,4 +1,6 @@
-export class RadarChartSVG extends HTMLElement {
+import { BaseChartSVG } from "./BaseChartSVG.js";
+
+export class RadarChartSVG extends BaseChartSVG {
   constructor({ width = 300, height = 300, levels = 5, maxValue = 5, data = [], title = '', fillColor = "rgba(0,200,0,0.3)", strokeColor = "green", fontSize = 8 }) {
     super();
     this.width = width;
@@ -76,7 +78,7 @@ export class RadarChartSVG extends HTMLElement {
       const angle = this.toRadians((360 / this.data.length) * i - 90);
       return this.getPoint(angle, value < this.maxValue / 2 ? value + .6 : value - .6);
     });
-    const text = points.map((p, i) => `<text x="${p.x}" y="${p.y}" font-size="${this.fontSize}" text-anchor="middle" dominant-baseline="middle">${this.data[i].value.toFixed(1)}</text>`);
+    const text = points.map((p, i) => `<text x="${p.x}" y="${p.y}" font-size="${this.fontSize}" text-anchor="middle" dominant-baseline="middle">${this.toFixed(this.data[i].value, 1)}</text>`);
     return text;
   }
 

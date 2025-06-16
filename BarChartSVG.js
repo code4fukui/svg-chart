@@ -1,4 +1,6 @@
-export class BarChartSVG extends HTMLElement {
+import { BaseChartSVG } from "./BaseChartSVG.js";
+
+export class BarChartSVG extends BaseChartSVG {
   constructor({ width = 600, barHeight = 25, barGap = 10, data = [], colors = [], maxValue = 100, marginLeft = 210, marginBottom = 20, fontSize = 15 }) {
     super();
     this.width = width;
@@ -26,7 +28,7 @@ export class BarChartSVG extends HTMLElement {
     `;
     if (value > 0) {
       segments += `<text x="${x + width / 2}" y="${y + this.barHeight / 2}" font-size="${this.fontSize}" fill="#000"
-                      text-anchor="middle" dominant-baseline="central">${value.toFixed(1)}%</text>`;
+                      text-anchor="middle" dominant-baseline="central">${this.toFixed(value, 0)}%</text>`;
     }
 
     // ラベル（左側）
@@ -66,10 +68,6 @@ export class BarChartSVG extends HTMLElement {
         </g>
       </svg>
     `;
-  }
-
-  update() {
-    this.innerHTML = this.draw();
   }
 }
 

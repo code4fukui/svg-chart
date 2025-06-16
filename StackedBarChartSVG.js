@@ -1,4 +1,6 @@
-export class StackedBarChartSVG extends HTMLElement {
+import { BaseChartSVG } from "./BaseChartSVG.js";
+
+export class StackedBarChartSVG extends BaseChartSVG {
   constructor({ width = 600, barHeight = 25, barGap = 10, data = [], categories = [], colors = [], maxValue = 100, marginLeft = 210, marginRight = 35, marginBottom = 45, fontSize = 15 }) {
     super();
     this.width = width;
@@ -28,7 +30,7 @@ export class StackedBarChartSVG extends HTMLElement {
       `;
       if (value > 0) {
         segments += `<text x="${x + width / 2}" y="${y + this.barHeight / 2}" font-size="${this.fontSize}" fill="#000"
-                        text-anchor="middle" dominant-baseline="central">${value.toFixed(1)}%</text>`;
+                        text-anchor="middle" dominant-baseline="central">${this.toFixed(value, 0)}%</text>`;
       }
       x += width;
     });
@@ -81,10 +83,6 @@ export class StackedBarChartSVG extends HTMLElement {
         </g>
       </svg>
     `;
-  }
-
-  update() {
-    this.innerHTML = this.draw();
   }
 }
 
