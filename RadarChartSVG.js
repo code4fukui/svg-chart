@@ -16,6 +16,9 @@ export class RadarChartSVG extends BaseChartSVG {
     this.strokeColor = strokeColor;
     this.fontSize = fontSize;
 
+    this.data.forEach(i => {
+      if (typeof i.value == "string") i.value = parseFloat(i.value);
+    });
     this.update();
   }
 
