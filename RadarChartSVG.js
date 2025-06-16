@@ -1,15 +1,17 @@
 export class RadarChartSVG extends HTMLElement {
-  constructor({ width = 300, height = 300, levels = 5, maxValue = 5, data = [], title = '' }) {
+  constructor({ width = 300, height = 300, levels = 5, maxValue = 5, data = [], title = '', fillColor = "rgba(0,200,0,0.3)", strokeColor = "green" }) {
     super();
     this.width = width;
     this.height = height;
     this.levels = levels;
     this.maxValue = maxValue;
     this.data = data; // [{ label, value }, ... ]
-    this.title = title;
+    //this.title = title;
     this.radius = Math.min(width, height) / 2 - 40;
     this.centerX = width / 2;
     this.centerY = height / 2;
+    this.fillColor = fillColor;
+    this.strokeColor = strokeColor;
 
     this.update();
   }
@@ -34,7 +36,7 @@ export class RadarChartSVG extends HTMLElement {
     let polygons = '';
     for (let level = 1; level <= this.levels; level++) {
       const r = (level / this.levels) * this.radius;
-      const points = this.data.map((item, i) => {
+      const points = this.data.map((_, i) => {
         const angle = this.toRadians((360 / this.data.length) * i - 90);
         return this.getPoint(angle, (level / this.levels) * this.maxValue);
       });
@@ -62,7 +64,7 @@ export class RadarChartSVG extends HTMLElement {
       const angle = this.toRadians((360 / this.data.length) * i - 90);
       return this.getPoint(angle, value);
     });
-    return this.drawPolygon(points, 'fill="rgba(0,200,0,0.3)" stroke="green" stroke-width="2"');
+    return this.drawPolygon(points, `fill="${this.fillColor}" stroke="${this.strokeColor}" stroke-width="2"`);
   }
 
   draw() {
@@ -71,7 +73,6 @@ export class RadarChartSVG extends HTMLElement {
         style="width:100%;height:100%"
         width="${this.width}" height="${this.height}" viewBox="0 0 ${this.width} ${this.height}"
       >
-        <title>${this.title}</title>
         ${this.drawCircle()}
         ${this.drawAxes()}
         ${this.drawDataPolygon()}
