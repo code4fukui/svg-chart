@@ -32,6 +32,15 @@ const chart1 = new RadarChartSVG({
   levels: 5,
   maxValue: 5,
   data: [
+    { label: "活気", value: 3 },
+    { label: "イライラ感のなさ", value: 3 },
+    { label: "疲労感のなさ", value: "3" },
+    { label: "不安感のなさ", value: "2" },
+    { label: "抗うつ感のなさ", value: 5 },
+    { label: "身体愁訴のなさ", value: 0 },
+  ],
+  /*
+  data: [
     { label: "活気", value: 3.5 },
     { label: "イライラ感のなさ", value: 3.83 },
     { label: "疲労感のなさ", value: "3.5" },
@@ -39,6 +48,7 @@ const chart1 = new RadarChartSVG({
     { label: "抗うつ感のなさ", value: 3.33 },
     { label: "身体愁訴のなさ", value: 3.67 },
   ],
+  */
   fillColor: "rgba(255, 0, 0, 0.2)",
   strokeColor: "rgba(255, 0, 0, 1.0)",
 });

@@ -1,7 +1,16 @@
 import { BaseChartSVG } from "./BaseChartSVG.js";
 
 export class RadarChartSVG extends BaseChartSVG {
-  constructor({ width = 300, height = 300, levels = 5, maxValue = 5, data = [], title = '', fillColor = "rgba(0,200,0,0.3)", strokeColor = "green", fontSize = 8 }) {
+  constructor({
+    width = 300,
+    height = 300,
+    levels = 5,
+    maxValue = 5,
+    data = [],
+    fillColor = "rgba(0,200,0,0.3)",
+    strokeColor = "green",
+    fontSize = 8,
+  }) {
     super();
     this.width = width;
     this.height = height;
@@ -15,10 +24,20 @@ export class RadarChartSVG extends BaseChartSVG {
     this.fillColor = fillColor;
     this.strokeColor = strokeColor;
     this.fontSize = fontSize;
-
+    
+    let floatflg = false;
     this.data.forEach(i => {
-      if (typeof i.value == "string") i.value = parseFloat(i.value);
+      if (typeof i.value == "string") {
+        i.value = parseFloat(i.value);
+      }
+      if (!floatflg) {
+        if (i.value != parseInt(i.value)) {
+          floatflg = true;
+        }
+      }
     });
+    this.fixedLen = floatflg ? 1 : 0;
+
     this.update();
   }
 
@@ -82,7 +101,7 @@ export class RadarChartSVG extends BaseChartSVG {
       const gap = 0.7;
       return this.getPoint(angle, value < this.maxValue / 2 ? gap + value : -gap + value);
     });
-    const text = points.map((p, i) => `<text x="${p.x}" y="${p.y}" font-size="${this.fontSize}" text-anchor="middle" dominant-baseline="middle">${this.toFixed(this.data[i].value, 1)}</text>`);
+    const text = points.map((p, i) => `<text x="${p.x}" y="${p.y}" font-size="${this.fontSize}" text-anchor="middle" dominant-baseline="middle">${this.toFixed(this.data[i].value, this.fixedLen)}</text>`);
     return text;
   }
 
