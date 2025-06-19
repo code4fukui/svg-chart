@@ -100,9 +100,24 @@ function createLineChart({
   labels.forEach((label, i) => {
     const series = data[label];
     const path = document.createElementNS(svgNS, "path");
+    let flg = false;
     const d = xLabels.map((xl, j) => {
-      const v = series[xl] ?? 0;
-      return `${j === 0 ? "M" : "L"}${scaleX(j)},${scaleY(v)}`;
+      const v = series[xl];
+      if (!flg) {
+        if (v === undefined) {
+          return ``;
+        } else {
+          flg = true;
+          return `M${scaleX(j)},${scaleY(v)}`;
+        }
+      } else {
+        if (v === undefined) {
+          flg = false;
+          return ``;
+        } else {
+          return `L${scaleX(j)},${scaleY(v)}`;
+        }
+      }
     }).join(" ");
     path.setAttribute("d", d);
     path.setAttribute("fill", "none");
