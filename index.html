@@ -6,6 +6,7 @@
 <div class="chart" id="div_chart1"></div>
 <div class="chart" id="div_chart2"></div>
 <div class="chart" id="div_chart3"></div>
+<div class="chart" id="div_chart4"></div>
 
 <hr>
 <a href="https://github.com/code4fukui/svg-chart">src on GitHub</a><br>
@@ -25,6 +26,7 @@
 import { RadarChartSVG } from "./RadarChartSVG.js";
 import { StackedBarChartSVG } from "./StackedBarChartSVG.js";
 import { BarChartSVG } from "./BarChartSVG.js";
+import { LineChartSVG } from './LineChartSVG.js';
 
 const chart1 = new RadarChartSVG({
   width: 400,
@@ -96,5 +98,23 @@ const chart3 = new BarChartSVG({
   ]
 });
 div_chart3.appendChild(chart3);
+
+const colors = ["blue", "green", "orange", "red", "purple", "deepskyblue"];
+const data = {
+  "青森県":  {
+    "1月": 500000, "2月": 600000, "3月": 800000,
+    "6月": 500000, "7月": 600000, "6月": 800000,
+    "7月": 500000, "8月": 600000, "9月": 800000,
+    "10月": 500000, "11月": 600000, "12月": 800000,
+  }, // 青森県
+  "岩手県":  { "1月": 400000, "2月": 550000, "3月": 750000, }, // 岩手県
+};
+div_chart4.appendChild(new LineChartSVG({
+  targetId: "chart",
+  width: 1000,
+  height: 500,
+  data,
+  colors,
+}));
 
 </script>
