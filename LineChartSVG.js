@@ -1,4 +1,5 @@
 import { BaseChartSVG } from "./BaseChartSVG.js";
+//import { BaseChartSVG } from "https://code4fukui.github.io/svg-chart/BaseChartSVG.js";
 
 function createLineChart({
   width = 800,
@@ -30,7 +31,10 @@ function createLineChart({
   const xCount = xLabels.length;
 
   const allValues = labels.flatMap(label => Object.values(data[label]));
-  const yMax = Math.ceil(Math.max(...allValues) / 100000) * 100000;
+  const max = Math.max(...allValues);
+  const unit = Math.pow(10, Math.ceil(Math.log(max) / Math.log(10)));
+  //const yMax = Math.ceil(max / 100000) * 100000;
+  const yMax = Math.ceil(max / unit) * unit;
 
   const scaleX = (i) => marginLeft + (i / (xCount - 1)) * chartWidth;
   const scaleY = (v) => marginTop + chartHeight - (v / yMax) * chartHeight;
@@ -46,7 +50,7 @@ function createLineChart({
     line.setAttribute("y1", y);
     line.setAttribute("y2", y);
     line.setAttribute("stroke", "#ccc");
-    line.setAttribute("stroke-dasharray", "2,2");
+    //line.setAttribute("stroke-dasharray", "2,2");
     svg.appendChild(line);
 
     const label = document.createElementNS(svgNS, "text");
@@ -57,6 +61,8 @@ function createLineChart({
     label.textContent = yValue.toLocaleString();
     svg.appendChild(label);
   }
+
+  const omit = xLabels.length > 100 ? 30 : 1;
 
   // X軸グリッドとラベル
   xLabels.forEach((xlabel, i) => {
@@ -70,13 +76,15 @@ function createLineChart({
     vline.setAttribute("stroke", "#eee");
     svg.appendChild(vline);
 
-    const text = document.createElementNS(svgNS, "text");
-    text.setAttribute("x", x);
-    text.setAttribute("y", height - marginTop + 15);
-    text.setAttribute("text-anchor", "middle");
-    text.setAttribute("font-size", fontSize);
-    text.textContent = xlabel;
-    svg.appendChild(text);
+    if (i % omit == 0) {
+      const text = document.createElementNS(svgNS, "text");
+      text.setAttribute("x", x);
+      text.setAttribute("y", height - marginTop + 15);
+      text.setAttribute("text-anchor", "middle");
+      text.setAttribute("font-size", fontSize);
+      text.textContent = xlabel;
+      svg.appendChild(text);
+    }
   });
 
   // 軸線
@@ -141,7 +149,6 @@ function createLineChart({
     line.setAttribute("stroke-width", 4);
     svg.appendChild(line);
 
-    // 黒文字ラベル
     const text = document.createElementNS(svgNS, "text");
     text.setAttribute("x", x + 25);
     text.setAttribute("y", y);
