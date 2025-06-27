@@ -32,8 +32,17 @@ function createLineChart({
 
   const allValues = labels.flatMap(label => Object.values(data[label]));
   const max = Math.max(...allValues);
-  const unit = Math.pow(10, Math.ceil(Math.log(max) / Math.log(10)));
-  //const yMax = Math.ceil(max / 100000) * 100000;
+  const calcUnit = (n) => {
+    const unit = Math.pow(10, Math.ceil(Math.log(max) / Math.log(10)));
+    for (let i = 1; i < 5; i++) {
+      const unit2 = unit / 5 * i;
+      if (n < unit2) {
+        return unit2;
+      }
+    }
+    return unit;
+  };
+  const unit = calcUnit(max);
   const yMax = Math.ceil(max / unit) * unit;
 
   const scaleX = (i) => marginLeft + (i / (xCount - 1)) * chartWidth;
