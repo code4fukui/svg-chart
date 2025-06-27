@@ -3,6 +3,14 @@
 - Charts by SVG
 - https://code4fukui.github.io/svg-chart/
 
+## supported chart type
+
+- RaderChartSVG
+- BarChartSVG
+- StackedBarChartSVG
+- LineChartSVG
+- PieChartSVG
+
 ## usage
 
 ```js
