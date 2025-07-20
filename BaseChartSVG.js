@@ -1,7 +1,7 @@
 export class BaseChartSVG extends HTMLElement {
   constructor() {
     super();
-    this.style.display = "inline-block;"
+    this.style.display = "inline-block";
   }
   toFixed(v, n) {
     if (typeof v != "number") {
