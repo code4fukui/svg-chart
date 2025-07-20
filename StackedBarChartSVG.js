@@ -15,7 +15,7 @@ export class StackedBarChartSVG extends BaseChartSVG {
     this.maxValue = maxValue;
     this.marginRight = marginRight;
     this.marginLeft = marginLeft;
-    this.marginBottom = marginBottom || (45 + Math.floor(categories.length / nlegend) * (fontSizeLegend * 1.5));
+    this.marginBottom = marginBottom || (30 + Math.ceil(categories.length / nlegend) * (fontSizeLegend * 1.7));
     this.height = data.length * (barHeight + barGap) + this.marginBottom;
     this.fontSize = fontSize;
     this.fontSizeLegend = fontSizeLegend;
@@ -72,7 +72,7 @@ export class StackedBarChartSVG extends BaseChartSVG {
   drawLegend() {
     return this.categories.map((cat, i) => {
       const x = this.marginLeft + (i % nlegend) * 190;
-      const y = this.data.length * (this.barHeight + this.barGap) + 26 + Math.floor(i / nlegend) * (this.fontSizeLegend * 1.7);
+      const y = this.data.length * (this.barHeight + this.barGap) + 32 + Math.floor(i / nlegend) * (this.fontSizeLegend * 1.7);
       return `
         <rect x="${x}" y="${y}" width="15" height="15" fill="${this.colors[i]}" />
         <text x="${x + 20}" y="${y + 12}" font-size="${this.fontSizeLegend}">${cat}</text>
