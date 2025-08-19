@@ -10,6 +10,7 @@
 - StackedBarChartSVG
 - LineChartSVG
 - PieChartSVG
+- StackedBarChartDateSVG
 
 ## usage
 

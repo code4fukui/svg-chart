@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<div id="chart1" style="width:100%;"></div>
+<div id="chart2" style="display: block; width:100%;"></div>
+<script type="module">
+import { StackedBarChartDateSVG } from "./StackedBarChartDateSVG.js";
+import { LineChartSVG } from './LineChartSVG.js';
+
+const data = [
+  { date: "2025-04-01", values: [100, 50] },
+  { date: "2025-04-02", values: [50, 50] },
+  { date: "2025-08-02", values: [90, 20] },
+  { date: "2026-03-31", values: [50] },
+  /*
+  { date: "2025-08-01", values: [10, 20, 5] },
+  { date: "2025-08-03", values: [ 5,  8, 2] },
+  { date: "2025-08-08", values: [12,  4, 6] },
+  { date: "2025-12-12", values: [ 7, 14, 3] },
+  */
+];
+
+chart1.appendChild(new StackedBarChartDateSVG({
+  width: 1720,
+  height: 500,
+  title: "日付軸の積み上げ棒グラフ",
+  colors: ["#f8b6c2", "#fde1a0", "#a4d6b1"],
+  barWidth: 3,
+  gap: 3,
+  tickCountX: 12,
+  data,
+}));
+
+/*
+const colors = ["blue", "green", "orange", "red", "purple", "deepskyblue"];
+const data2 = {
+  "青森県":  {
+    "1月": 500000, "2月": 600000, "3月": 800000,
+    "4月": 500000, "5月": 600000, "6月": 800000,
+    "7月": 500000, "8月": 600000, "9月": 800000,
+    "10月": 500000, "11月": 600000, "12月": 800000,
+  }, // 青森県
+  "岩手県":  { "1月": 400000, "2月": 550000, "3月": 750000, "5月": 150000, "6月": 200000 }, // 岩手県
+};
+chart2.appendChild(new LineChartSVG({
+  width: 1000,
+  height: 500,
+  data: data2,
+  colors,
+}));
+*/
+
+</script>
