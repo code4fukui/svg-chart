@@ -7,8 +7,10 @@ export class RadarChartSVG extends BaseChartSVG {
     levels = 5,
     maxValue = 5,
     data = [],
+    dataPrev = null,
     fillColor = "rgba(0,200,0,0.3)",
     strokeColor = "green",
+    strokeColorPrev = "gray",
     fontSize = 8,
   }) {
     super();
@@ -17,12 +19,14 @@ export class RadarChartSVG extends BaseChartSVG {
     this.levels = levels;
     this.maxValue = maxValue;
     this.data = data; // [{ label, value }, ... ]
+    this.dataPrev = dataPrev; // [{ label, value }, ... ]
     //this.title = title;
     this.radius = Math.min(width, height) / 2 - 18;
     this.centerX = width / 2;
     this.centerY = height / 2;
     this.fillColor = fillColor;
     this.strokeColor = strokeColor;
+    this.strokeColorPrev = strokeColorPrev;
     this.fontSize = fontSize;
     
     let floatflg = false;
@@ -85,13 +89,21 @@ export class RadarChartSVG extends BaseChartSVG {
       `;
     }).join('');
   }
-
-  drawDataPolygon() {
-    const points = this.data.map((item, i) => {
+  getPoints(data) {
+    const points = data.map((item, i) => {
       const value = item.value;
       const angle = this.toRadians((360 / this.data.length) * i - 90);
       return this.getPoint(angle, value);
     });
+    return points;
+  }
+  drawDataPolygonPrev() {
+    if (!this.dataPrev) return "";
+    const points = this.getPoints(this.dataPrev);
+    return this.drawPolygon(points, `fill="none" stroke="${this.strokeColorPrev}" opacity="0.5" stroke-width="2"`);
+  }
+  drawDataPolygon() {
+    const points = this.getPoints(this.data);
     return this.drawPolygon(points, `fill="${this.fillColor}" stroke="${this.strokeColor}" stroke-width="2"`);
   }
   drawDataText() {
@@ -113,6 +125,7 @@ export class RadarChartSVG extends BaseChartSVG {
       >
         ${this.drawCircle()}
         ${this.drawAxes()}
+        ${this.drawDataPolygonPrev()}
         ${this.drawDataPolygon()}
         ${this.drawDataText()}
       </svg>

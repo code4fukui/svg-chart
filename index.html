@@ -4,6 +4,7 @@
 <h1>svg-chart demo</h1>
 
 <div class="chart" id="div_chart1"></div>
+<div class="chart" id="div_chart1b"></div>
 <div class="chart" id="div_chart2"></div>
 <div class="chart" id="div_chart3"></div>
 <div class="chart" id="div_chart4"></div>
@@ -59,6 +60,33 @@ const chart1 = new RadarChartSVG({
 });
 
 div_chart1.appendChild(chart1);
+
+const chart1b = new RadarChartSVG({
+  width: 400,
+  height: 220,
+  levels: 5,
+  maxValue: 5,
+  data: [
+    { label: "活気", value: 3 },
+    { label: "イライラ感のなさ", value: 3 },
+    { label: "疲労感のなさ", value: "3" },
+    { label: "不安感のなさ", value: "2" },
+    { label: "抗うつ感のなさ", value: 5 },
+    { label: "身体愁訴のなさ", value: 0 },
+  ],
+  dataPrev: [
+    { label: "活気", value: 2 },
+    { label: "イライラ感のなさ", value: 2.5 },
+    { label: "疲労感のなさ", value: "3.1" },
+    { label: "不安感のなさ", value: "3" },
+    { label: "抗うつ感のなさ", value: 4.2 },
+    { label: "身体愁訴のなさ", value: 2 },
+  ],
+  fillColor: "rgba(255, 0, 0, 0.2)",
+  strokeColor: "rgba(255, 0, 0, 1.0)",
+});
+
+div_chart1b.appendChild(chart1b);
 
 const chart2 = new StackedBarChartSVG({
   width: 600,
