@@ -1,10 +1,8 @@
 import { BaseChartSVG } from "./BaseChartSVG.js";
 //import { BaseChartSVG } from "https://code4fukui.github.io/svg-chart/BaseChartSVG.js";
 
-const nlegend = 3;
-
 export class StackedBarChartSVG extends BaseChartSVG {
-  constructor({ width = 600, barHeight = 25, barGap = 10, data = [], categories = [], colors = [], maxValue = 100, marginLeft = 210, marginRight = 35, marginBottom = null, fontSize = 15, fontSizeLegend = 15 }) {
+  constructor({ width = 600, barHeight = 25, barGap = 10, data = [], categories = [], colors = [], maxValue = 100, marginLeft = 210, marginRight = 35, marginBottom = null, fontSize = 15, fontSizeLegend = 15, nlegend = 3 }) {
     super();
     this.width = width;
     this.barHeight = barHeight;
@@ -19,6 +17,7 @@ export class StackedBarChartSVG extends BaseChartSVG {
     this.height = data.length * (barHeight + barGap) + this.marginBottom;
     this.fontSize = fontSize;
     this.fontSizeLegend = fontSizeLegend;
+    this.nlegend = nlegend;
 
     this.update();
   }
@@ -71,8 +70,10 @@ export class StackedBarChartSVG extends BaseChartSVG {
 
   drawLegend() {
     return this.categories.map((cat, i) => {
-      const x = this.marginLeft + (i % nlegend) * 190;
-      const y = this.data.length * (this.barHeight + this.barGap) + 32 + Math.floor(i / nlegend) * (this.fontSizeLegend * 1.7);
+      const w = this.width - this.marginRight; // - this.marginLeft; //  - this.marginRight;
+      const nw = Math.floor(w / this.nlegend);
+      const x = this.marginLeft + (i % this.nlegend) * nw;
+      const y = this.data.length * (this.barHeight + this.barGap) + 32 + Math.floor(i / this.nlegend) * (this.fontSizeLegend * 1.7);
       return `
         <rect x="${x}" y="${y}" width="15" height="15" fill="${this.colors[i]}" />
         <text x="${x + 20}" y="${y + 12}" font-size="${this.fontSizeLegend}">${cat}</text>
