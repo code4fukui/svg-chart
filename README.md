@@ -14,17 +14,26 @@
 
 ## usage
 
-```js
-import { RadarChartSVG } from "./RaderChartSVG.js";
-import { BarChartSVG } from "./BarChartSVG.js";
+```html
+<div id=chart></div>
+<div id=chart2></div>
+<script type="module">
+import { RadarChartSVG } from "https://code4fukui.github.io/svg-chart/RadarChartSVG.js";
+import { BarChartSVG } from "https://code4fukui.github.io/svg-chart/BarChartSVG.js";
 
 const chart = new RadarChartSVG({
   width: 400,
   height: 400,
   levels: 5,
   maxValue: 5,
-  labels: ["活気", "イライラ感のなさ", "疲労感のなさ", "不安感のなさ", "抗うつ感のなさ", "身体愁訴のなさ"],
-  values: [3.5, 3.83, 3.5, 2.83, 3.33, 3.67],
+  data: [
+    { label: "活気", value: 3 },
+    { label: "イライラ感のなさ", value: 3 },
+    { label: "疲労感のなさ", value: "3" },
+    { label: "不安感のなさ", value: "2" },
+    { label: "抗うつ感のなさ", value: 5 },
+    { label: "身体愁訴のなさ", value: 0 },
+  ],
   title: "〇〇株式会社",
 });
 
@@ -39,19 +48,18 @@ const chart2 = new BarChartSVG({
   categories: ["強い症状", "少し症状", "なし"],
   colors: ["#f8b6c2", "#fde1a0", "#a4d6b1"],
   data: [
-    { label: "めまいがする", values: [0, 0, 100] },
-    { label: "体のふしぶしが痛む", values: [0, 0, 100] },
-    { label: "頭が重かったり頭痛がする", values: [0, 28.6, 71.4] },
-    { label: "首筋や肩がこる", values: [14.3, 42.9, 42.8] },
-    { label: "腰が痛い", values: [14.3, 42.9, 42.8] },
-    { label: "目が疲れる", values: [14.3, 42.9, 42.8] },
-    { label: "動悸や息切れがする", values: [0, 0, 100] },
-    { label: "胃腸の具合が悪い", values: [0, 28.6, 71.4] },
-    { label: "食欲がない", values: [0, 0, 100] },
-    { label: "便秘や下痢をする", values: [0, 0, 100] },
-    { label: "よく眠れない", values: [0, 0, 100] },
+    { label: "項目A", value: 10 },
+    { label: "項目B", value: 20 },
+    { label: "項目C (長さ補正)", value: 30 },
+    { label: "項目D", value: 1 },
+    { label: "項目E", value: 2 },
+    { label: "項目F", value: 3 },
+    { label: "項目G", value: 4 },
+    { label: "項目H", value: 5 },
+    { label: "項目I", value: 6 },
   ]
 });
 
 document.getElementById("chart2").innerHTML = chart2.draw();
+</script>
 ```
