@@ -21,7 +21,7 @@ export class RadarChartSVGCore extends BaseChartSVGCore {
     this.data = data; // [{ label, value }, ... ]
     this.dataPrev = dataPrev; // [{ label, value }, ... ]
     //this.title = title;
-    this.radius = Math.min(width, height) / 2 - 18;
+    this.radius = Math.min(width, height) / 2 - (fontSize + fontSize / 8) * 2;
     this.centerX = width / 2;
     this.centerY = height / 2;
     this.fillColor = fillColor;
