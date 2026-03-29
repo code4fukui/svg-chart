@@ -60,7 +60,7 @@ export class BarChartSVG extends BaseChartSVG {
   draw() {
     const content = this.data.map((entry, i) => this.drawBarRow(entry, i * (this.barHeight + this.barGap), i)).join('');
     return `
-      <svg
+      <svg xmlns="http://www.w3.org/2000/svg"
         style="width:100%;height:100%"
         width="${this.width + this.marginLeft + 20}" height="${this.height}" viewBox="0 0 ${this.width + this.marginLeft + 20} ${this.height}"
       >

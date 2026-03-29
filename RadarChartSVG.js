@@ -119,7 +119,7 @@ export class RadarChartSVG extends BaseChartSVG {
 
   draw() {
     return `
-      <svg
+      <svg xmlns="http://www.w3.org/2000/svg"
         style="width:100%;height:100%"
         width="${this.width}" height="${this.height}" viewBox="0 0 ${this.width} ${this.height}"
       >
