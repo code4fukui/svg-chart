@@ -7,7 +7,7 @@ A lightweight, dependency-free library for creating SVG charts using ES Modules 
 [**View the Live Demo**](https://code4fukui.github.io/svg-chart/)
 
 
-![Demo screenshot showing a radar chart, a stacked bar chart, a simple bar chart, a line chart, and a pie chart.](https://code4fukui.github.io/svg-chart/ss.png)
+![Demo screenshot showing a radar chart, a stacked bar chart, a simple bar chart, a line chart, and a pie chart.](https://github.com/code4fukui/svg-chart)
 
 
 ## Features
